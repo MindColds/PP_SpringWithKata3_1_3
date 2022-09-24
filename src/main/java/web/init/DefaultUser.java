@@ -23,25 +23,20 @@ public class DefaultUser {
     }
 
     @PostConstruct
-    private void dataBaseInit() {
+    private void initailizeDefaultUser() {
         Role roleAdmin = new Role("ADMIN");
         Role roleUser = new Role("USER");
         Set<Role> adminSet = new HashSet<>();
-        Set<Role> userSet = new HashSet<>();
 
         roleService.addRole(roleAdmin);
         roleService.addRole(roleUser);
 
         adminSet.add(roleAdmin);
         adminSet.add(roleUser);
-        userSet.add(roleUser);
 
-        User newUser = new User("User", "User", 30, "user@mail.com", "user",
-                "user", userSet);
-        User admin = new User("Admin", "Admin", 30, "admin@mail.ru", "admin",
+        User admin = new User("Admin", "Admin", 42, "admin@mail.ru",
                 "admin", adminSet);
 
-        userService.saveUser(newUser);
         userService.saveUser(admin);
     }
 }
